@@ -1,0 +1,4 @@
+n_images: 400
+PSNR:  23.6653 dB
+SSIM:  0.6702
+LPIPS: 0.4966

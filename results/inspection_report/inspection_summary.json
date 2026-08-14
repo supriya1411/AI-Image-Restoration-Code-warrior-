@@ -1,0 +1,52 @@
+{
+  "pairing": {
+    "gt_file_count": 3200,
+    "lr_file_count": 3200,
+    "matched_pairs": 3200,
+    "gt_without_lr": [],
+    "lr_without_gt": []
+  },
+  "GT": {
+    "n_scanned": 3200,
+    "majority_shape": [
+      256,
+      256
+    ],
+    "shape_distribution": {
+      "(256, 256)": 3200
+    },
+    "dtype_distribution": {
+      "float32": 3200
+    },
+    "global_min": 0.0,
+    "global_max": 1.0,
+    "mean_of_per_image_means": 0.4335284413612533,
+    "mean_of_per_image_stds": 0.1876291425678845,
+    "files_with_nan": [],
+    "files_with_inf": [],
+    "corrupted_files": [],
+    "shape_outliers": []
+  },
+  "NoisyLR": {
+    "n_scanned": 3200,
+    "majority_shape": [
+      128,
+      128
+    ],
+    "shape_distribution": {
+      "(128, 128)": 3200
+    },
+    "dtype_distribution": {
+      "float32": 3200
+    },
+    "global_min": -0.2785630524158478,
+    "global_max": 2.1580049991607666,
+    "mean_of_per_image_means": 0.433536288213957,
+    "mean_of_per_image_stds": 0.20579525967312115,
+    "files_with_nan": [],
+    "files_with_inf": [],
+    "corrupted_files": [],
+    "shape_outliers": []
+  },
+  "elapsed_seconds": 21.83468747138977
+}

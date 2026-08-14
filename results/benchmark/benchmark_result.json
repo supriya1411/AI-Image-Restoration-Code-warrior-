@@ -1,0 +1,39 @@
+{
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "cuda_version": "12.1",
+    "torch_version": "2.5.1+cu121",
+    "python_version": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "config": {
+    "batch_size": 16,
+    "n_warmup_batches": 5,
+    "n_timed_batches": 30,
+    "total_images_timed": 480
+  },
+  "stage_timings_mean_seconds_per_batch": {
+    "disk_read": 0.0029866300001837468,
+    "preprocess": 0.0004497599996587572,
+    "cpu_to_gpu": 0.0005130899997311644,
+    "model_execution": 0.24142402999956783,
+    "gpu_to_cpu": 0.0019014833327673842,
+    "postprocess": 0.0006049966660308807,
+    "save": 0.024206243333416446,
+    "total": 0.2720862333313562
+  },
+  "stage_timings_std_seconds_per_batch": {
+    "disk_read": 0.000747455298554153,
+    "preprocess": 0.00010569321796366518,
+    "cpu_to_gpu": 0.00010659995625894682,
+    "model_execution": 0.014570347696490057,
+    "gpu_to_cpu": 0.00030152666848703524,
+    "postprocess": 0.00013397456912021228,
+    "save": 0.0033697422557044205,
+    "total": 0.016690365184980863
+  },
+  "throughput": {
+    "images_per_second": 58.80488624543762,
+    "mean_latency_ms_per_image": 17.005389583209762
+  }
+}

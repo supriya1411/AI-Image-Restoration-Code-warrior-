@@ -1,0 +1,44 @@
+======================================================================
+DATASET INSPECTION SUMMARY
+======================================================================
+GT files found       : 3200
+NoisyLR files found  : 3200
+Matched pairs        : 3200
+GT without LR pair   : 0
+LR without GT pair   : 0
+
+----------------------------------------------------------------------
+GT
+----------------------------------------------------------------------
+  Scanned successfully : 3200
+  Majority shape       : (256, 256)
+  Shape distribution   : {(256, 256): 3200}
+  Dtype distribution   : {'float32': 3200}
+  Global min           : 0.0
+  Global max           : 1.0
+  Mean of per-img mean : 0.433528
+  Mean of per-img std  : 0.187629
+  Files with NaN       : 0
+  Files with Inf       : 0
+  Corrupted files      : 0
+  Shape outliers       : 0
+
+----------------------------------------------------------------------
+NoisyLR
+----------------------------------------------------------------------
+  Scanned successfully : 3200
+  Majority shape       : (128, 128)
+  Shape distribution   : {(128, 128): 3200}
+  Dtype distribution   : {'float32': 3200}
+  Global min           : -0.2785630524158478
+  Global max           : 2.1580049991607666
+  Mean of per-img mean : 0.433536
+  Mean of per-img std  : 0.205795
+  Files with NaN       : 0
+  Files with Inf       : 0
+  Corrupted files      : 0
+  Shape outliers       : 0
+
+======================================================================
+Done in 21.8s
+======================================================================

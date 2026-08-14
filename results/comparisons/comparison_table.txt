@@ -1,0 +1,8 @@
+Model             PSNR (dB)      SSIM     LPIPS
+Baseline CNN        23.6653    0.6702    0.4966
+DARC-Net            25.4332    0.7710    0.2565
+
+DARC-Net vs Baseline:
+  PSNR:  +1.7679 dB
+  SSIM:  +0.1008
+  LPIPS: improved by 0.2400

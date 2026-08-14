@@ -1,0 +1,49 @@
+# ============================================================
+# Python virtual environments
+# ============================================================
+.venv/
+.venv-1/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# ============================================================
+# Node / Frontend dependencies
+# ============================================================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# ============================================================
+# Dataset - NEVER commit training data
+# ============================================================
+train/
+TRAIN/
+GT/
+NoisyLR/
+
+# ============================================================
+# Local temporary files
+# ============================================================
+*.log
+*.tmp
+
+# ============================================================
+# OS files
+# ============================================================
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# Local Python-generated outputs
+# ============================================================
+*.egg-info/
+# Local/generated visualization outputs
+visual_results/
+inference_results/
+# Generated inference output
+results/sanity_check_restored/
+# Benchmark generated output
+results/benchmark/benchmark_outputs/

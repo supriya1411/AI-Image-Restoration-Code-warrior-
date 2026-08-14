@@ -1,0 +1,103 @@
+# configs/final_config.yaml
+#
+# Documents the EXACT configuration that produced the submitted checkpoint:
+#   weights/darc_losses_best.pth
+#
+# Source script: train_darc_losses.py
+# This file does not change training behavior on its own -- it is
+# documentation/reproducibility record, matching KLA's requirement to
+# "track experiments, random seeds, hyperparameters, checkpoints and
+# final configuration."
+
+submitted_checkpoint:
+  path: "weights/darc_losses_best.pth"
+  produced_by: "train_darc_losses.py"
+  epoch: 10                     # best epoch, as saved in the checkpoint dict
+
+dataset:
+  root: "TRAIN/"                 # contains GT/ and NoisyLR/, 3200 pairs
+  train_val_split:
+    val_fraction: 0.125          # 400 / 3200
+    seed: 42
+    method: "src/data_split.py -> make_train_val_split (random.Random(seed).shuffle)"
+  augmentation: "none"           # confirmed: no augmentation applied during this training run
+
+model:
+  architecture: "DARCNet (src/darc_net.py)"
+  # Called as DARCNet() with no explicit arguments -- these are the class defaults
+  # actually in effect for this checkpoint. If darc_net.py's defaults are ever
+  # changed, this record is what defines what darc_losses_best.pth was trained with.
+  in_channels: 1
+  out_channels: 1
+  channels: 64
+  num_blocks: 8
+  embedding_dim: 32
+  trainable_parameters: 892577    # fill in from the "Trainable parameters:" line printed by train_darc_losses.py
+
+loss:
+  implementation: "src/losses.py -> RestorationLoss"
+  components:
+    charbonnier_weight: 1.0        # implicit base term
+    ssim_weight: 0.1                # lambda_ssim
+    gradient_weight: 0.1            # lambda_gradient
+    degradation_consistency_weight: null   # NOT USED in this training run
+  note: >
+    The original DARC-Net design (see architecture diagrams) includes a
+    degradation-consistency loss term (predicted HR -> blur -> downsample ->
+    noise -> compare to input NoisyLR). This term was NOT implemented in the
+    loss used to produce the submitted checkpoint. This is disclosed here
+    rather than implied by the architecture diagrams alone.
+
+training:
+  batch_size: 4
+  epochs: 10
+  optimizer: "AdamW"
+  learning_rate: 0.0002          # 2e-4
+  weight_decay: 0.0001           # 1e-4
+  lr_scheduler: "none"
+  seed:
+    status: "NOT SET in train_darc_losses.py at time of submitted checkpoint's training"
+    note: >
+      torch.manual_seed() / torch.cuda.manual_seed_all() were not called before
+      model creation or training in the script that produced this checkpoint.
+      The train/val SPLIT is reproducible (data_split seed=42), but exact model
+      weight initialization and training-batch order are not bit-for-bit
+      reproducible from a fresh run of train_darc_losses.py as it stood.
+      A seed has since been added for future runs (see "fix_applied" below).
+    fix_applied: |
+      SEED = 42
+      torch.manual_seed(SEED)
+      if torch.cuda.is_available():
+          torch.cuda.manual_seed_all(SEED)
+      # Added near the top of train_darc_losses.py, before model creation.
+      # This does not retroactively change darc_losses_best.pth, but makes
+      # future training runs from this script reproducible.
+
+evaluation:
+  validation_set: "same 400-image held-out split (seed=42) used everywhere in this repo"
+  metrics_script: "scripts/evaluate_darc_full.py"
+  results:
+    psnr_db: 25.4332
+    ssim: 0.7710
+    lpips: 0.2565
+  baseline_comparison:
+    baseline_model: "BaselineCNN (src/baseline_model.py)"
+    baseline_checkpoint: "weights/baseline_best.pth"
+    baseline_results:
+      psnr_db: 23.6653
+      ssim: 0.6702
+      lpips: 0.4966
+    comparison_script: "scripts/compare_results.py"
+
+hardware_software_at_training_time:
+  gpu: "NVIDIA GeForce RTX 3050 Laptop GPU"
+  cuda_version: "12.1"
+  torch_version: "2.5.1+cu121"
+  python_version: "3.12.10"
+  os: "Windows-11-10.0.26200-SP0"
+  note: >
+    This is the DEVELOPMENT machine used for training and validation.
+    Final H100 throughput benchmarking (KLA requirement) is a SEPARATE
+    measurement -- see results/benchmark/benchmark_result.json for the
+    RTX 3050 end-to-end benchmark; H100 numbers will come from KLA's own
+    shortlisting run, not this repo.
