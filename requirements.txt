@@ -1,13 +1,2 @@
 torch==2.5.1
-torchvision
-numpy
-scipy
-scikit-image
-Pillow
-tqdm
-torchmetrics
-lpips
-FastAPI
-uvicorn
-python-multipart
-PyYAML
+numpy==2.4.4
